@@ -457,11 +457,13 @@ a:hover {
   position: relative;
   isolation: isolate;
   overflow: hidden;
-  min-height: clamp(660px, 92vh, 980px);
-  min-height: clamp(660px, 92svh, 980px);
-  padding: 2rem 0 2.5rem;
+  min-height: clamp(540px, 80vh, 880px);
+  min-height: clamp(540px, 80svh, 880px);
+  padding: 2.25rem 0 2.5rem;
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
+  gap: 2.5rem;
   background: #060d17;
   color: var(--white);
 }
@@ -2339,8 +2341,8 @@ label small {
   }
 
   .home-hero {
-    min-height: auto;
-    padding: 2rem 0 2.5rem;
+    min-height: clamp(480px, 75vh, 680px);
+    padding: 2rem 0 2.25rem;
   }
 
   .hero-headline {
@@ -2600,6 +2602,7 @@ label small {
   }
 
   .home-hero {
+    min-height: clamp(440px, 70vh, 580px);
     padding: 1.25rem 0 1.75rem;
   }
 
