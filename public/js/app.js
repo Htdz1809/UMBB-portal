@@ -24,6 +24,17 @@ if (heroVideo) {
   if (reducedMotion.addEventListener) {
     reducedMotion.addEventListener('change', syncHeroVideo);
   }
+
+  var showHeroVideo = function () {
+    heroVideo.classList.add('is-loaded');
+  };
+  if (heroVideo.readyState >= 2) {
+    showHeroVideo();
+  } else {
+    heroVideo.addEventListener('playing', showHeroVideo, { once: true });
+    heroVideo.addEventListener('canplay', showHeroVideo, { once: true });
+    heroVideo.addEventListener('loadeddata', showHeroVideo, { once: true });
+  }
 }
 
 // Scroll animation for promo section articles
