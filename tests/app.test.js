@@ -140,7 +140,7 @@ test('health check reports database availability', async () => {
 
 test('home page renders university presentation and recent announcements', async () => {
   const response = await request(buildApp()).get('/').expect(200);
-  assert.match(response.text, /BOUGARA de Boumerdès/);
+  assert.match(response.text, /M(?:'|&#39;)Hamed Bougara University of Boumerdès/);
   assert.match(response.text, /UMBB/);
   assert.match(response.text, /Recent announcements/);
   assert.match(response.text, /Autumn 2026 enrolment now open/);

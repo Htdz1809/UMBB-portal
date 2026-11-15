@@ -9,8 +9,8 @@ ways:
 2. **PaaS environment:** a Render web service connected to a managed Render
    PostgreSQL database.
 
-The portal uses publicly available information about L’Université M'Hamed
-BOUGARA de Boumerdès (UMBB). Seeded announcements are sample content for the
+The portal uses publicly available information about M'Hamed Bougara
+University of Boumerdès (UMBB). Seeded announcements are sample content for the
 administration demonstration, and this is not an official university website.
 The project was created for an academic cloud-computing assignment.
 

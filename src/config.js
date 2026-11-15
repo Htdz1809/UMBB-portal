@@ -46,7 +46,7 @@ module.exports = {
   adminPasswordHash,
   categories: ['News', 'Announcement', 'Event'],
   university: {
-    name: "L’Université M'Hamed BOUGARA de Boumerdès",
+    name: "M'Hamed Bougara University of Boumerdès",
     shortName: 'UMBB',
     tagline: 'Higher education, research and innovation since 1998.',
     founded: 1998,
@@ -55,6 +55,6 @@ module.exports = {
     phone: '+213 24 79 52 75',
     address: "Avenue de l'Indépendance, 35000 Boumerdès, Algeria",
     about:
-      "L’Université M'Hamed BOUGARA de Boumerdès (UMBB) is a public university created in 1998 by Executive Decree 98-189. Its six faculties and two institutes cover science and technology, hydrocarbons and chemistry, economics and management, law and political science, languages, electrical engineering and applied sciences.",
+      "M'Hamed Bougara University of Boumerdès (UMBB) is a public university established in 1998 by Executive Decree 98-189. Its six faculties and two institutes cover science and technology, hydrocarbons and chemistry, economics and management, law and political science, languages, electrical engineering and applied sciences.",
   },
 };
