@@ -65,3 +65,21 @@ if (promoCards.length > 0 && 'IntersectionObserver' in window) {
     promoObserver.observe(card);
   });
 }
+
+// Flash notification dismiss handler
+document.addEventListener('click', function (event) {
+  var closeButton = event.target.closest('.flash-close');
+  if (closeButton) {
+    var flashBox = closeButton.closest('.flash-container') || closeButton.closest('.flash');
+    if (flashBox) {
+      flashBox.style.transition = 'opacity 0.2s ease, transform 0.2s ease';
+      flashBox.style.opacity = '0';
+      flashBox.style.transform = 'translateY(-6px)';
+      setTimeout(function () {
+        if (flashBox.parentNode) {
+          flashBox.parentNode.removeChild(flashBox);
+        }
+      }, 200);
+    }
+  }
+});
