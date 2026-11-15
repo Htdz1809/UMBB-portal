@@ -94,3 +94,17 @@ document.addEventListener('click', function (event) {
     }
   }
 });
+
+// Sticky header elevation and compact transition on scroll
+var siteHeader = document.querySelector('.site-header');
+if (siteHeader) {
+  var handleHeaderScroll = function () {
+    if (window.scrollY > 24) {
+      siteHeader.classList.add('is-scrolled');
+    } else {
+      siteHeader.classList.remove('is-scrolled');
+    }
+  };
+  window.addEventListener('scroll', handleHeaderScroll, { passive: true });
+  handleHeaderScroll();
+}
