@@ -1,0 +1,41 @@
+# Render Blueprint: https://render.com/docs/blueprint-spec
+# Deploy with "New +" -> "Blueprint" and select the repository that contains
+# this file. ADMIN_PASSWORD is intentionally not stored here; Render asks for
+# it when the Blueprint is created (sync: false).
+databases:
+  - name: umbb-db
+    databaseName: umbb
+    user: umbb
+    plan: free
+    region: frankfurt
+
+services:
+  - type: web
+    name: umbb-portal
+    runtime: docker
+    dockerfilePath: ./Dockerfile
+    plan: free
+    region: frankfurt
+    healthCheckPath: /healthz
+    autoDeploy: true
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: DATABASE_URL
+        fromDatabase:
+          name: umbb-db
+          property: connectionString
+      # Render's internal URL uses the private network and does not require TLS.
+      # External tools must use the external URL with sslmode=require instead.
+      - key: DATABASE_SSL
+        value: "false"
+      - key: SESSION_SECRET
+        generateValue: true
+      - key: ADMIN_USERNAME
+        value: admin
+      - key: ADMIN_PASSWORD
+        sync: false
+      - key: COOKIE_SECURE
+        value: "true"
+      - key: TRUST_PROXY
+        value: "1"

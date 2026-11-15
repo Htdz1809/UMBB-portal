@@ -1,0 +1,72 @@
+name: umbb-portal
+
+services:
+  db:
+    image: postgres:16-alpine
+    container_name: umbb-db
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB:-university}
+      POSTGRES_USER: ${POSTGRES_USER:-university}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?Set POSTGRES_PASSWORD in .env}
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    networks:
+      - backend
+    healthcheck:
+      test:
+        [
+          "CMD-SHELL",
+          "pg_isready -U ${POSTGRES_USER:-university} -d ${POSTGRES_DB:-university}",
+        ]
+      interval: 10s
+      timeout: 5s
+      retries: 6
+      start_period: 10s
+    # Intentionally no "ports": PostgreSQL is reachable only on the internal
+    # container network, never from the host or the internet.
+
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: umbb-app
+    restart: unless-stopped
+    environment:
+      NODE_ENV: production
+      PORT: 3000
+      DATABASE_URL: postgres://${POSTGRES_USER:-university}:${POSTGRES_PASSWORD}@db:5432/${POSTGRES_DB:-university}
+      DATABASE_SSL: "false"
+      SESSION_SECRET: ${SESSION_SECRET:?Set SESSION_SECRET in .env}
+      ADMIN_USERNAME: ${ADMIN_USERNAME:-admin}
+      ADMIN_PASSWORD: ${ADMIN_PASSWORD:?Set ADMIN_PASSWORD in .env}
+      COOKIE_SECURE: ${COOKIE_SECURE:-auto}
+      TRUST_PROXY: "0"
+    ports:
+      - "${APP_PORT:-3000}:3000"
+    depends_on:
+      db:
+        condition: service_healthy
+    networks:
+      - backend
+    healthcheck:
+      test:
+        [
+          "CMD",
+          "node",
+          "-e",
+          "fetch('http://127.0.0.1:3000/healthz').then(r => process.exit(r.ok ? 0 : 1)).catch(() => process.exit(1))",
+        ]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 20s
+
+volumes:
+  pgdata:
+    name: umbb_pgdata
+
+networks:
+  backend:
+    name: umbb_backend
+    driver: bridge

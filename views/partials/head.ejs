@@ -1,0 +1,20 @@
+<%
+  let bodyClass = 'page-general';
+  if (currentPath === '/') bodyClass = 'page-home';
+  else if (currentPath.startsWith('/departments')) bodyClass = 'page-academics';
+  else if (currentPath.startsWith('/news')) bodyClass = 'page-news';
+  else if (currentPath.startsWith('/admin')) bodyClass = 'page-admin';
+%>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title><%= pageTitle ? pageTitle + ' · ' + university.name : university.name %></title>
+    <meta name="description" content="<%= university.tagline %>">
+    <meta name="theme-color" content="#005a9c">
+    <link rel="icon" href="/favicon.svg?v=<%= assetVersion %>" type="image/svg+xml">
+    <link rel="stylesheet" href="/css/styles.css?v=<%= assetVersion %>">
+    <script src="/js/app.js?v=<%= assetVersion %>" defer></script>
+  </head>
+  <body class="<%= bodyClass %>">

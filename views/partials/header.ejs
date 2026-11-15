@@ -1,0 +1,42 @@
+<a class="skip-link" href="#main">Skip to main content</a>
+
+<header class="site-header">
+  <div class="header-shell">
+    <a class="brand" href="/" aria-label="<%= university.name %> home">
+      <img class="brand-mark" src="/images/umbb-logo.png?v=<%= assetVersion %>" alt="" width="46" height="46">
+      <span class="brand-text">
+        <strong>UMBB</strong>
+        <small>Boumerdès</small>
+      </span>
+    </a>
+
+    <nav class="site-nav" aria-label="Main navigation">
+      <a href="/" class="<%= currentPath === '/' ? 'active' : '' %>" <%= currentPath === '/' ? 'aria-current="page"' : '' %>>Home</a>
+      <a href="/departments" class="<%= currentPath === '/departments' ? 'active' : '' %>" <%= currentPath === '/departments' ? 'aria-current="page"' : '' %>>Academics</a>
+      <a href="/news" class="<%= currentPath.startsWith('/news') ? 'active' : '' %>" <%= currentPath.startsWith('/news') ? 'aria-current="page"' : '' %>>News &amp; events</a>
+      <a href="/#about">About</a>
+    </nav>
+
+    <div class="header-actions">
+      <% if (currentUser) { %>
+        <% if (currentPath.startsWith('/admin')) { %>
+          <a href="/" class="header-staff">View website &nearr;</a>
+        <% } else { %>
+          <a href="/admin" class="header-staff is-active">Admin panel</a>
+        <% } %>
+        <form action="/admin/logout" method="post" class="inline-form">
+          <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+          <button type="submit" class="header-staff">Sign out</button>
+        </form>
+      <% } %>
+    </div>
+  </div>
+</header>
+
+<% if (flash) { %>
+  <div class="container">
+    <div class="flash flash-<%= flash.type %>" role="status">
+      <%= flash.message %>
+    </div>
+  </div>
+<% } %>
