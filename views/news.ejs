@@ -8,10 +8,17 @@
         <p class="eyebrow">Stay informed</p>
         <h1>News and announcements</h1>
       </div>
-      <p class="page-lead">
-        Updates from UMBB, including academic notices, events and research
-        stories from across its faculties and institutes.
-      </p>
+      <div>
+        <p class="page-lead">
+          Updates from UMBB, including academic notices, events and research
+          stories from across its faculties and institutes.
+        </p>
+        <% if (currentUser) { %>
+          <div style="margin-top: 1.25rem;">
+            <a class="button button-primary" href="/admin/announcements/new">+ Add announcement</a>
+          </div>
+        <% } %>
+      </div>
     </div>
   </section>
 

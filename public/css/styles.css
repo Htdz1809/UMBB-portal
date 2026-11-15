@@ -331,6 +331,19 @@ a:hover {
   color: var(--black);
 }
 
+.header-add-btn {
+  border-color: var(--yellow);
+  background: var(--yellow);
+  color: var(--black);
+  font-weight: 800;
+}
+
+.header-add-btn:hover {
+  border-color: var(--white);
+  background: var(--white);
+  color: var(--black);
+}
+
 /* Flash Notifications */
 
 .flash-container {

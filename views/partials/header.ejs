@@ -19,6 +19,7 @@
 
     <div class="header-actions">
       <% if (currentUser) { %>
+        <a href="/admin/announcements/new" class="header-staff header-add-btn">+ Add announcement</a>
         <form action="/admin/logout" method="post" class="inline-form">
           <input type="hidden" name="_csrf" value="<%= csrfToken %>">
           <button type="submit" class="header-staff">Sign out</button>
