@@ -851,6 +851,38 @@ a:hover {
   opacity: 0.82;
 }
 
+.campus-locations-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+  margin-top: 0.75rem;
+  width: 100%;
+}
+
+.campus-loc-item {
+  display: flex;
+  flex-direction: column;
+  background: rgba(0, 0, 0, 0.22);
+  padding: 0.42rem 0.75rem;
+  border-radius: 8px;
+  border-left: 3px solid var(--yellow);
+}
+
+.campus-loc-item strong {
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--yellow);
+  font-weight: 700;
+  margin-bottom: 0.15rem;
+}
+
+.campus-loc-item span {
+  font-size: 0.78rem;
+  line-height: 1.35;
+  color: rgba(255, 255, 255, 0.95);
+}
+
 .promo-footer {
   margin-top: 2rem;
   padding-top: 0;
