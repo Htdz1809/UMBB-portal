@@ -19,11 +19,6 @@
 
     <div class="header-actions">
       <% if (currentUser) { %>
-        <% if (currentPath.startsWith('/admin')) { %>
-          <a href="/" class="header-staff">View website &nearr;</a>
-        <% } else { %>
-          <a href="/admin" class="header-staff is-active">Admin panel</a>
-        <% } %>
         <form action="/admin/logout" method="post" class="inline-form">
           <input type="hidden" name="_csrf" value="<%= csrfToken %>">
           <button type="submit" class="header-staff">Sign out</button>
