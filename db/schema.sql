@@ -41,4 +41,14 @@ CREATE TABLE IF NOT EXISTS app_metadata (
   updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
 );
 
+-- Migrate legacy French department names to English
+UPDATE departments SET name = 'Faculty of Sciences' WHERE name = 'Faculté des Sciences';
+UPDATE departments SET name = 'Faculty of Technology' WHERE name = 'Faculté de Technologie';
+UPDATE departments SET name = 'Faculty of Hydrocarbons and Chemistry' WHERE name = 'Faculté des Hydrocarbures et de la Chimie';
+UPDATE departments SET name = 'Faculty of Economic, Commercial and Management Sciences' WHERE name = 'Faculté des Sciences Economiques, Commerciales et des Sciences de Gestion';
+UPDATE departments SET name = 'Faculty of Law and Political Science' WHERE name = 'Faculté de Droit et des Sciences Politiques';
+UPDATE departments SET name = 'Faculty of Letters and Languages' WHERE name = 'Faculté des Lettres et des Langues';
+UPDATE departments SET name = 'Institute of Electrical and Electronic Engineering' WHERE name = 'Institut de Génie Electrique et Electronique';
+UPDATE departments SET name = 'Institute of Applied Science and Technology' WHERE name = 'Institut des Sciences et Techniques Appliquées';
+
 COMMIT;

@@ -29,7 +29,7 @@ const announcement = {
 
 const department = {
   id: 1,
-  name: 'Faculté des Sciences',
+  name: 'Faculty of Sciences',
   description: 'Six departments covering mathematics, physics, chemistry, computer science and biology.',
   head_of_department: 'Abdelhakim DAOUI, Dean',
   contact_email: 'a.daoui@univ-boumerdes.dz',
@@ -148,7 +148,7 @@ test('home page renders university presentation and recent announcements', async
 
 test('faculties and institutes page renders database content', async () => {
   const response = await request(buildApp()).get('/departments').expect(200);
-  assert.match(response.text, /Faculté des Sciences/);
+  assert.match(response.text, /Faculty of Sciences/);
   assert.match(response.text, /Abdelhakim DAOUI/);
 });
 

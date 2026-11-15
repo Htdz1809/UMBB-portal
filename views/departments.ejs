@@ -1,5 +1,18 @@
 <%
   const facultyLogoMap = {
+    // English names
+    'Faculty of Sciences': '/images/fs.png',
+    'Faculty of Technology': '/images/ft.png',
+    'Faculty of Hydrocarbons and Chemistry': '/images/fhc.png',
+    'Faculty of Economic, Commercial and Management Sciences': '/images/fsecsg.png',
+    'Faculty of Economics, Commercial and Management Sciences': '/images/fsecsg.png',
+    'Faculty of Law and Political Science': '/images/fdsp.png',
+    'Faculty of Letters and Languages': '/images/fll.png',
+    'Institute of Electrical and Electronic Engineering': '/images/igee.png',
+    'Institute of Applied Science and Technology': '/images/ista.png',
+    'Institute of Applied Sciences and Technology': '/images/ista.png',
+
+    // French fallback
     'Faculté des Sciences': '/images/fs.png',
     'Faculté de Technologie': '/images/ft.png',
     'Faculté des Hydrocarbures et de la Chimie': '/images/fhc.png',
@@ -39,8 +52,22 @@
       <% } else { %>
         <div class="card-grid department-grid">
           <% departments.forEach((department, index) => { %>
-            <% const unitType = department.name.toLowerCase().includes('institut') ? 'Institute' : 'Faculty'; %>
-            <% const logoSrc = facultyLogoMap[department.name]; %>
+            <% const isInstitute = department.name.toLowerCase().includes('institut') || department.name.toLowerCase().includes('institute'); %>
+            <% const unitType = isInstitute ? 'Institute' : 'Faculty'; %>
+            <%
+              let logoSrc = facultyLogoMap[department.name];
+              if (!logoSrc) {
+                const lower = department.name.toLowerCase();
+                if (lower.includes('hydrocarbon') || lower.includes('chimie')) logoSrc = '/images/fhc.png';
+                else if (lower.includes('technolog')) logoSrc = '/images/ft.png';
+                else if (lower.includes('econom') || lower.includes('gestion')) logoSrc = '/images/fsecsg.png';
+                else if (lower.includes('droit') || lower.includes('law')) logoSrc = '/images/fdsp.png';
+                else if (lower.includes('lettre') || lower.includes('letter') || lower.includes('language')) logoSrc = '/images/fll.png';
+                else if (lower.includes('electr') || lower.includes('igee') || lower.includes('inelec')) logoSrc = '/images/igee.png';
+                else if (lower.includes('appliqu') || lower.includes('applied') || lower.includes('ista')) logoSrc = '/images/ista.png';
+                else if (lower.includes('science')) logoSrc = '/images/fs.png';
+              }
+            %>
             <article class="card department-card">
               <div class="card-topline">
                 <% if (logoSrc) { %>

@@ -1,56 +1,69 @@
 BEGIN;
 
+-- Migrate any legacy French department names to English
+UPDATE departments SET name = 'Faculty of Sciences' WHERE name = 'Faculté des Sciences';
+UPDATE departments SET name = 'Faculty of Technology' WHERE name = 'Faculté de Technologie';
+UPDATE departments SET name = 'Faculty of Hydrocarbons and Chemistry' WHERE name = 'Faculté des Hydrocarbures et de la Chimie';
+UPDATE departments SET name = 'Faculty of Economic, Commercial and Management Sciences' WHERE name = 'Faculté des Sciences Economiques, Commerciales et des Sciences de Gestion';
+UPDATE departments SET name = 'Faculty of Law and Political Science' WHERE name = 'Faculté de Droit et des Sciences Politiques';
+UPDATE departments SET name = 'Faculty of Letters and Languages' WHERE name = 'Faculté des Lettres et des Langues';
+UPDATE departments SET name = 'Institute of Electrical and Electronic Engineering' WHERE name = 'Institut de Génie Electrique et Electronique';
+UPDATE departments SET name = 'Institute of Applied Science and Technology' WHERE name = 'Institut des Sciences et Techniques Appliquées';
+
 INSERT INTO departments (name, description, head_of_department, contact_email)
 VALUES
   (
-    'Faculté des Sciences',
+    'Faculty of Sciences',
     'Six departments: Mathematics, Physics, Chemistry, Computer Science, Biology and Foreign Languages, with cells in agronomy, infotronics and sports science.',
     'Abdelhakim DAOUI, Dean',
     'a.daoui@univ-boumerdes.dz'
   ),
   (
-    'Faculté de Technologie',
+    'Faculty of Technology',
     'Eight departments covering process engineering, food technology, environmental engineering, mechanical engineering, energy, industrial maintenance, materials engineering and civil engineering.',
     'Mohamed SAIDI, Dean',
     'mo.saidi@univ-boumerdes.dz'
   ),
   (
-    'Faculté des Hydrocarbures et de la Chimie',
+    'Faculty of Hydrocarbons and Chemistry',
     'Six departments spanning geophysics and earthquake engineering, mining and petroleum geology, hydrocarbon transport, chemical and pharmaceutical processes, automation, and hydrocarbon economics.',
     'Boudjema HAMADA, Dean',
     'bou.hamada@univ-boumerdes.dz'
   ),
   (
-    'Faculté des Sciences Economiques, Commerciales et des Sciences de Gestion',
+    'Faculty of Economic, Commercial and Management Sciences',
     'Three departments in Management Sciences, Commercial Sciences and Economic Sciences, with programmes in economics, management and finance.',
     'Ahmed DORBANE, Dean',
     'dorbaneahmed9@gmail.com'
   ),
   (
-    'Faculté de Droit et des Sciences Politiques',
+    'Faculty of Law and Political Science',
     'Three departments in Public Law, Private Law and Political Science, plus an Arabic language and literature cell, based at the Boudouaou campus.',
     'Abdeladhim BENSEGHIER, Dean',
     'a.benseghier@univ-boumerdes.dz'
   ),
   (
-    'Faculté des Lettres et des Langues',
+    'Faculty of Letters and Languages',
     'Three departments in Arabic Literature, French and English, based at the Boudouaou campus.',
     'Noureddine OULEBSIR, Dean',
     'n.oulebsir@univ-boumerdes.dz'
   ),
   (
-    'Institut de Génie Electrique et Electronique',
+    'Institute of Electrical and Electronic Engineering',
     'Three departments in Basic Teaching, Electronics, and Automation and Electrotechnics, continuing the legacy of the former INELEC institute.',
     'Karim BAICHE, Director',
     'kbaiche@univ-boumerdes.dz'
   ),
   (
-    'Institut des Sciences et Techniques Appliquées',
+    'Institute of Applied Science and Technology',
     'Applied science and technology programmes delivered at the Boumerdès campus, with a focus on professional and technical training.',
     'Hamid AKNOUCHE, Director',
     'hamidaknouche@univ-boumerdes.dz'
   )
-ON CONFLICT (name) DO NOTHING;
+ON CONFLICT (name) DO UPDATE SET
+  description = EXCLUDED.description,
+  head_of_department = EXCLUDED.head_of_department,
+  contact_email = EXCLUDED.contact_email;
 
 INSERT INTO announcements (title, summary, body, category, published_at)
 SELECT *
@@ -80,7 +93,7 @@ FROM (
     (
       'Entrepreneurship and innovation support for student projects',
       'The Maison de l’Entrepreneuriat and the CATI support student projects, innovation and links with industry.',
-      E'The Maison de l''Entrepreneuriat and the Centre d''Appui aux Technologies de l''Innovation support students and staff who wish to develop innovative projects.\n\nThe services are based at the Institut de Génie Electrique et Electronique and work with academic units across the university.',
+      E'The Maison de l''Entrepreneuriat and the Centre d''Appui aux Technologies de l''Innovation support students and staff who wish to develop innovative projects.\n\nThe services are based at the Institute of Electrical and Electronic Engineering and work with academic units across the university.',
       'Event',
       TIMESTAMPTZ '2026-10-30 12:00:00+00'
     ),
